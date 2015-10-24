@@ -28,6 +28,9 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
     <yangtools.version>0.8.0-SNAPSHOT</yangtools.version>
     <dlux.version>0.3.0-SNAPSHOT</dlux.version>
     <configfile.directory>etc/opendaylight/karaf</configfile.directory>
+    <feature.openflowplugin.version>0.2.0-SNAPSHOT</feature.openflowplugin.version>
+    <openflowplugin.version>0.2.0-SNAPSHOT</openflowplugin.version>
+    <feature.base.version>1.6.0-SNAPSHOT</feature.base.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -48,6 +51,7 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
       </dependency>
     </dependencies>
   </dependencyManagement>
+  
   <dependencies>
     <dependency>
       <groupId>org.opendaylight.yangtools</groupId>
@@ -88,6 +92,22 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
       <version>${dlux.version}</version>
       <type>xml</type>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+       <groupId>org.opendaylight.openflowplugin</groupId>
+       <artifactId>features-openflowplugin</artifactId>
+       <version>${feature.openflowplugin.version}</version>
+       <classifier>features</classifier>
+       <type>xml</type>
+       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+       <groupId>org.opendaylight.controller</groupId>
+       <artifactId>features-base</artifactId>
+       <version>${feature.base.version}</version>
+       <classifier>features</classifier>
+       <type>xml</type>
+       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>

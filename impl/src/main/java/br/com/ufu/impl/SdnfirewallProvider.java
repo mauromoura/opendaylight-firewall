@@ -25,6 +25,7 @@ public class SdnfirewallProvider implements BindingAwareProvider, AutoCloseable 
         LOG.info("SdnfirewallProvider Session Initiated");
         DataBroker db = session.getSALService(DataBroker.class);
         sdnfirewallService = session.addRpcImplementation(SdnfirewallService.class, new SdnfirewallImpl(db));
+        RuleRegistryDataChangeListenerFuture future = new RuleRegistryDataChangeListenerFuture(db);
     }
 
     @Override

@@ -1,0 +1,9 @@
+module sdnfirewall {
+    yang-version 1;
+    namespace "urn:opendaylight:params:xml:ns:yang:sdnfirewall";
+    prefix "sdnfirewall";
+
+    revision "2015-01-05" {
+        description "Initial revision of sdnfirewall model";
+    }
+}

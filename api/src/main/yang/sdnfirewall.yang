@@ -6,4 +6,44 @@ module sdnfirewall {
     revision "2015-01-05" {
         description "Initial revision of sdnfirewall model";
     }
+        
+    rpc add-rule {
+        input {
+            leaf name {
+                type string;
+            }
+            leaf node {
+            	type string;
+            }
+            leaf ip-addr {
+                type string;
+            }
+            leaf port {
+                type string;
+            }
+        }
+        output {
+            leaf greeting {
+                type string;
+            }
+        }
+    }
+    
+    container rule-registry {
+        list rule-registry-entry {
+            key "name";
+            leaf name {
+                type string;
+            }
+            leaf node {
+            	type string;
+            }
+            leaf ip-addr {
+                type string;
+            }
+            leaf port {
+                type string;
+            }
+        }
+    }
 }

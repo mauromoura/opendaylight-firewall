@@ -56,46 +56,7 @@ public class SdnfirewallImpl implements SdnfirewallService {
   @Override
   public Future<RpcResult<AddRuleOutput>> addRule(AddRuleInput input) {
 
-    NodeId nodeId = new NodeId(input.getNode());
-
-    // Creating match object
-    MatchBuilder matchBuilder = new MatchBuilder();
-    MatchUtils.createDstL3IPv4Match(matchBuilder, new Ipv4Prefix(input.getIpAddr()));
-    MatchUtils
-        .createSetDstTcpMatch(matchBuilder, new PortNumber(Integer.parseInt(input.getPort())));
-
-    /*
-     * Create Flow
-     */
-    String flowId = "New firewall rule" + input.getName();
-    FlowBuilder flowBuilder = new FlowBuilder();
-    flowBuilder.setMatch(matchBuilder.build());
-    flowBuilder.setId(new FlowId(flowId));
-    FlowKey key = new FlowKey(new FlowId(flowId));
-    flowBuilder.setBarrier(true);
-    flowBuilder.setTableId((short) 0);
-    flowBuilder.setKey(key);
-    flowBuilder.setPriority(32768);
-    flowBuilder.setFlowName(flowId);
-    flowBuilder.setHardTimeout(0);
-    flowBuilder.setIdleTimeout(0);
-
-    /*
-     * Perform transaction to store rule
-     */
-    InstanceIdentifier<Flow> flowIID =
-        InstanceIdentifier.builder(Nodes.class).child(Node.class, new NodeKey(nodeId))
-            .augmentation(FlowCapableNode.class)
-            .child(Table.class, new TableKey(flowBuilder.getTableId()))
-            .child(Flow.class, flowBuilder.getKey()).build();
-
-    Preconditions.checkNotNull(db);
-    WriteTransaction transaction = db.newWriteOnlyTransaction();
-    transaction.merge( LogicalDatastoreType.CONFIGURATION, flowIID, flowBuilder.build(),true);
-    CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
-    Futures.addCallback(future, new LoggingFuturesCallBack<Void>("Failed add firewall rule", LOG));
-
-    LOG.info("Added firewall rule with ip {} and port {} into node {}", input.getIpAddr());
+    //TODO
 
     AddRuleOutput output =
         new AddRuleOutputBuilder().setGreeting("Added firewall rule").build();
